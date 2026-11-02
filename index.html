@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>更好的游戏？ — 下载</title>
+<style>
+:root{
+  --bg:#0d0d15; --bg2:#151522; --card:rgba(255,255,255,.04);
+  --border:rgba(255,255,255,.08); --text:#e8e8f0; --muted:#8a8aa0;
+  --green:#4ecca3; --purple:#7b61ff; --red:#e94560;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
+  background:radial-gradient(circle at 20% 0%,#1a1a2e 0%,var(--bg) 55%) fixed;
+  color:var(--text); line-height:1.6; min-height:100vh; overflow-x:hidden;
+}
+a{color:var(--green);text-decoration:none}
+/* ---------- 导航 ---------- */
+nav{
+  position:sticky; top:0; z-index:50;
+  background:rgba(13,13,21,.7); backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border);
+}
+.nav-inner{
+  max-width:1100px; margin:0 auto; padding:14px 24px;
+  display:flex; align-items:center; justify-content:space-between;
+}
+.logo{font-size:20px;font-weight:800;letter-spacing:.5px}
+.logo .q{color:var(--green)}
+.nav-links{display:flex;gap:22px;align-items:center;font-size:14px}
+.nav-links a{color:var(--muted);transition:color .2s}
+.nav-links a:hover{color:var(--text)}
+/* ---------- 按钮 ---------- */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  padding:12px 26px;border-radius:12px;font-size:15px;font-weight:600;
+  border:1px solid transparent;cursor:pointer;transition:all .2s;
+}
+.btn-primary{
+  background:linear-gradient(135deg,var(--green),#3aa885);color:#0d0d15;
+  box-shadow:0 0 0 rgba(78,204,163,0);
+}
+.btn-primary:hover{box-shadow:0 0 24px rgba(78,204,163,.35);transform:translateY(-1px)}
+.btn-ghost{border-color:var(--border);color:var(--text);background:transparent}
+.btn-ghost:hover{border-color:var(--green);color:var(--green)}
+.btn-sm{padding:8px 18px;font-size:13px;border-radius:9px}
+/* ---------- Hero ---------- */
+.hero{
+  max-width:1100px;margin:0 auto;padding:90px 24px 70px;text-align:center;
+  position:relative;
+}
+.hero::before{
+  content:"";position:absolute;inset:0;z-index:-1;
+  background:radial-gradient(circle at 50% 30%,rgba(123,97,255,.12),transparent 60%);
+}
+.hero h1{
+  font-size:clamp(42px,7vw,76px);font-weight:900;letter-spacing:-1px;
+  line-height:1.1;margin-bottom:18px;
+}
+.hero h1 .q{color:var(--green)}
+.hero .sub{
+  font-size:clamp(16px,2vw,19px);color:var(--muted);
+  max-width:620px;margin:0 auto 34px;
+}
+.hero-actions{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-bottom:24px}
+.hero-meta{font-size:13px;color:var(--muted);letter-spacing:.3px}
+.hero-meta .dot{margin:0 8px;opacity:.4}
+/* ---------- 通用区块 ---------- */
+.section{max-width:1100px;margin:0 auto;padding:70px 24px}
+.section h2{font-size:30px;font-weight:800;text-align:center;margin-bottom:10px}
+.section-sub{text-align:center;color:var(--muted);margin-bottom:44px;font-size:15px}
+/* ---------- 特性卡片 ---------- */
+.features-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px;
+}
+.feature{
+  background:var(--card);border:1px solid var(--border);border-radius:16px;
+  padding:26px 22px;transition:all .25s;
+}
+.feature:hover{border-color:rgba(78,204,163,.35);transform:translateY(-3px)}
+.feature .ico{font-size:28px;margin-bottom:12px}
+.feature h3{font-size:17px;margin-bottom:8px;font-weight:700}
+.feature p{font-size:14px;color:var(--muted)}
+/* ---------- 下载区 ---------- */
+.platforms{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;
+}
+.platform{
+  background:var(--card);border:1px solid var(--border);border-radius:16px;
+  padding:30px 24px;text-align:center;position:relative;transition:all .25s;
+}
+.platform.active{
+  border-color:var(--green);
+  box-shadow:0 0 0 1px var(--green),0 0 40px rgba(78,204,163,.12);
+}
+.platform .plat-icon{font-size:38px;margin-bottom:12px}
+.platform h3{font-size:18px;margin-bottom:6px}
+.platform .plat-req{font-size:13px;color:var(--muted);margin-bottom:20px}
+.platform .badge{
+  position:absolute;top:14px;right:14px;font-size:11px;font-weight:700;
+  padding:3px 9px;border-radius:99px;background:var(--green);color:#0d0d15;
+  letter-spacing:.5px;
+}
+.platform .plat-dl{width:100%;margin-top:4px}
+/* ---------- 更新日志 ---------- */
+.timeline{max-width:720px;margin:0 auto;position:relative;padding-left:28px}
+.timeline::before{
+  content:"";position:absolute;left:6px;top:6px;bottom:6px;width:2px;
+  background:linear-gradient(var(--green),var(--purple),transparent);
+}
+.release{position:relative;margin-bottom:34px}
+.release::before{
+  content:"";position:absolute;left:-27px;top:6px;width:12px;height:12px;
+  border-radius:50%;background:var(--green);box-shadow:0 0 12px rgba(78,204,163,.6);
+}
+.release.pending::before{background:var(--purple);box-shadow:0 0 12px rgba(123,97,255,.6)}
+.release .ver{font-weight:800;font-size:16px}
+.release .date{font-size:12px;color:var(--muted);margin-left:10px}
+.release ul{margin-top:8px;padding-left:18px;color:var(--muted);font-size:14px}
+.release li{margin-bottom:3px}
+/* ---------- FAQ ---------- */
+.faq{max-width:720px;margin:0 auto}
+.faq details{
+  background:var(--card);border:1px solid var(--border);border-radius:12px;
+  padding:18px 22px;margin-bottom:12px;
+}
+.faq summary{
+  cursor:pointer;font-weight:600;font-size:15px;list-style:none;
+  display:flex;justify-content:space-between;align-items:center;
+}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";color:var(--green);font-size:20px;transition:transform .2s}
+.faq details[open] summary::after{transform:rotate(45deg)}
+.faq details p{margin-top:12px;color:var(--muted);font-size:14px}
+/* ---------- 页脚 ---------- */
+footer{
+  border-top:1px solid var(--border);margin-top:40px;
+  padding:34px 24px;text-align:center;color:var(--muted);font-size:13px;
+}
+footer .flogo{font-weight:800;color:var(--text);font-size:15px;margin-bottom:8px}
+footer .flogo .q{color:var(--green)}
+/* ---------- 响应式 ---------- */
+@media(max-width:720px){
+  .nav-links a:not(.btn){display:none}
+  .hero{padding:60px 20px 50px}
+  .section{padding:50px 20px}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <div class="logo">更好的游戏<span class="q">？</span></div>
+    <div class="nav-links">
+      <a href="#features">特性</a>
+      <a href="#download">下载</a>
+      <a href="#changelog">更新日志</a>
+      <a href="#faq">常见问题</a>
+      <a class="btn btn-primary btn-sm" href="#download">立即下载</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <h1>更好的游戏<span class="q">？</span></h1>
+  <p class="sub">不依赖中心服务器,朋友之间直连。8 人同桌,从保皇开始。</p>
+  <div class="hero-actions">
+    <a class="btn btn-primary" href="#download">下载 Windows 版</a>
+    <a class="btn btn-ghost" href="#features">了解更多</a>
+  </div>
+  <div class="hero-meta">
+    当前版本 <strong id="verLabel">v0.1.0</strong>
+    <span class="dot">·</span> 仅支持 PC
+    <span class="dot">·</span> 游客登录即玩
+  </div>
+</header>
+
+<section id="features" class="section">
+  <h2>为什么是"更好的游戏？"</h2>
+  <p class="section-sub">没有中心服务器,没有账号注册,没有中间商。</p>
+  <div class="features-grid">
+    <div class="feature">
+      <div class="ico">🔗</div>
+      <h3>P2P 直连</h3>
+      <p>房主即主机,玩家之间直接建立连接,游戏数据不经过第三方服务器。</p>
+    </div>
+    <div class="feature">
+      <div class="ico">👥</div>
+      <h3>最多 8 人同桌</h3>
+      <p>PC 端支持最多 8 人联机,手机端上限 6 人。当前版本先服务 PC。</p>
+    </div>
+    <div class="feature">
+      <div class="ico">🎭</div>
+      <h3>游客登录</h3>
+      <p>打开软件,输入昵称,直接开局。不收集手机号,不强制注册。</p>
+    </div>
+    <div class="feature">
+      <div class="ico">🔄</div>
+      <h3>自动更新</h3>
+      <p>新版本静默推送,下载后提示重启即可,不用手动卸载重装。</p>
+    </div>
+  </div>
+</section>
+
+<section id="download" class="section">
+  <h2>下载安装包</h2>
+  <p class="section-sub">安装包托管在 GitHub Releases。下载后双击安装,打开即玩。</p>
+  <div class="platforms" id="platforms">
+    <div class="platform" data-platform="windows">
+      <div class="plat-icon">🪟</div>
+      <h3>Windows</h3>
+      <p class="plat-req">Windows 10 / 11 · 64 位</p>
+      <a class="btn btn-primary plat-dl" href="#" data-dl="windows">下载 .exe</a>
+    </div>
+    <div class="platform" data-platform="macos">
+      <div class="plat-icon">🍎</div>
+      <h3>macOS</h3>
+      <p class="plat-req">macOS 11+ · Apple Silicon / Intel</p>
+      <a class="btn btn-ghost plat-dl" href="#" data-dl="macos">下载 .dmg</a>
+    </div>
+    <div class="platform" data-platform="linux">
+      <div class="plat-icon">🐧</div>
+      <h3>Linux</h3>
+      <p class="plat-req">AppImage · 通用</p>
+      <a class="btn btn-ghost plat-dl" href="#" data-dl="linux">下载 .AppImage</a>
+    </div>
+  </div>
+  <p class="section-sub" style="margin-top:26px;font-size:13px">
+    安装包 SHA256 校验值见 GitHub Releases 页面。遇到问题请查阅下方常见问题。
+  </p>
+</section>
+
+<section id="changelog" class="section">
+  <h2>更新日志</h2>
+  <p class="section-sub">每一次版本变更都记录在这里。</p>
+  <div class="timeline">
+    <div class="release pending">
+      <span class="ver">v0.2.0</span><span class="date">规划中</span>
+      <ul>
+        <li>保皇完整规则引擎(皇帝/侍卫/革命党、憋 6、计分)</li>
+        <li>P2P 房间创建与加入</li>
+        <li>自动更新通道接入</li>
+      </ul>
+    </div>
+    <div class="release">
+      <span class="ver">v0.1.0</span><span class="date">内测</span>
+      <ul>
+        <li>官网"更好的游戏？"上线</li>
+        <li>Windows / macOS / Linux 下载入口</li>
+        <li>游客登录与房间容量规则(PC 8 人 / 手机 6 人)设计定稿</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="faq" class="section">
+  <h2>常见问题</h2>
+  <p class="section-sub">关于下载、联机和更新的说明。</p>
+  <div class="faq">
+    <details open>
+      <summary>需要注册账号吗?</summary>
+      <p>不需要。软件采用游客登录,打开后输入昵称即可创建或加入房间。昵称仅用于本局显示,不存储任何个人信息。</p>
+    </details>
+    <details>
+      <summary>支持手机吗?</summary>
+      <p>当前版本仅支持 PC。移动端适配在规划中,届时手机端房间上限为 6 人,PC 端为 8 人。</p>
+    </details>
+    <details>
+      <summary>没有服务器,怎么联机?</summary>
+      <p>采用 P2P 直连:创建房间的玩家作为主机运行游戏逻辑,其他玩家直接与主机建立加密连接。游戏数据不经过中心服务器。</p>
+    </details>
+    <details>
+      <summary>如何更新软件?</summary>
+      <p>软件内置自动更新。启动时检测到新版本会后台下载,下载完成后提示重启生效,无需手动卸载重装。</p>
+    </details>
+    <details>
+      <summary>为什么叫"更好的游戏？"</summary>
+      <p>因为"更好"是个问句。没有中心服务器、没有账号体系、没有强制社交——是不是更好,你玩过再说。</p>
+    </details>
+  </div>
+</section>
+
+<footer>
+  <div class="flogo">更好的游戏<span class="q">？</span></div>
+  <div>© 2026 更好的游戏 · 仅供朋友间娱乐使用</div>
+</footer>
+
+<script>
+/* =========================================================
+   配置区:部署前只需要改这里
+   ========================================================= */
+const VERSION = '0.1.0';
+const RELEASES_URL = 'https://github.com/yourname/better-game/releases';
+// 安装包命名建议用英文,避免 URL 编码问题
+const DOWNLOADS = {
+  windows: `${RELEASES_URL}/latest/download/BetterGame-Setup-${VERSION}.exe`,
+  macos:   `${RELEASES_URL}/latest/download/BetterGame-${VERSION}.dmg`,
+  linux:   `${RELEASES_URL}/latest/download/BetterGame-${VERSION}.AppImage`,
+};
+/* ========================================================= */
+
+document.getElementById('verLabel').textContent = 'v' + VERSION;
+
+// 平台自动识别 + 高亮
+(function detectPlatform(){
+  const ua = navigator.userAgent.toLowerCase();
+  let plat = 'windows';
+  if (ua.includes('mac')) plat = 'macos';
+  else if (ua.includes('linux')) plat = 'linux';
+  const el = document.querySelector(`.platform[data-platform="${plat}"]`);
+  if (el) el.classList.add('active');
+})();
+
+// 下载按钮绑定
+document.querySelectorAll('[data-dl]').forEach(a => {
+  const key = a.dataset.dl;
+  a.href = DOWNLOADS[key] || '#';
+  a.addEventListener('click', e => {
+    // 如果还是占位链接,给出提示(部署后删掉这段即可)
+    if (a.href.includes('yourname') || a.href === location.href + '#') {
+      e.preventDefault();
+      alert('安装包尚未上传。\n请先把安装包传到 GitHub Releases,并修改 index.html 里的 RELEASES_URL。');
+    }
+  });
+});
+</script>
+</body>
+</html>
